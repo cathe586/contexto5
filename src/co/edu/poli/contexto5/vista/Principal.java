@@ -1,3 +1,4 @@
+
 package co.edu.poli.contexto5.vista;
 
 import co.edu.poli.contexto5.modelo.Combustible;
@@ -29,14 +30,15 @@ public class Principal {
      * Punto de entrada de la aplicación.
      * @param args Argumentos de línea de comandos.
      */
+    
 public static void main(String[] args) {
 
         // --- BLOQUE DE INSTANCIACIÓN ORIGINAL ---
         
         Punto punto = new Punto("Bogota", "P001", "ENC001", "2020");
-        System.out.println(">> Punto: " + punto);
-        System.out.println("   " + punto.calcularEdadDePunto("2020"));
-        System.out.println();
+       /// System.out.println(">> Punto: " + punto);
+      //  System.out.println("   " + punto.calcularEdadDePunto("2020"));
+       // System.out.println();
 
         Empresa empresa = new Empresa(null, 2010, "ENC001", "Satelites de comunicacion",
                 "contacto@empresa.com", "Bogota", "SateliteCo S.A.S", "2024-01-15",
@@ -73,29 +75,29 @@ public static void main(String[] args) {
                 "SAT-001", "Estacion Central", "estacion@empresa.com",
                 "EST001", "ENC001");
 
-        System.out.println(">> Empresa:      " + empresa);
-        System.out.println(">> Encargado:    " + encargado);
-        System.out.println(">> Combustible:  " + combustible);
-        System.out.println(">> Satelite:     " + satelite);
-        System.out.println(">> Herramienta:  " + herramienta);
-        System.out.println(">> Mantenimiento:" + mantenimiento);
-        System.out.println(">> Simulacion:   " + simulacion);
-        System.out.println(">> Mision:       " + mision);
-        System.out.println(">> Estacion:     " + estacion);
-        System.out.println();
+      // System.out.println(">> Empresa:      " + empresa);
+       // System.out.println(">> Encargado:    " + encargado);
+       // System.out.println(">> Combustible:  " + combustible);
+       // System.out.println(">> Satelite:     " + satelite);
+        //System.out.println(">> Herramienta:  " + herramienta);
+        //System.out.println(">> Mantenimiento:" + mantenimiento);
+        //System.out.println(">> Simulacion:   " + simulacion);
+       // System.out.println(">> Mision:       " + mision);
+       // System.out.println(">> Estacion:     " + estacion);
+        //System.out.println();
 
         // --- DEMOSTRACIÓN DE SOBRECARGA Y POLIMORFISMO ---
         
-        System.out.println("   PUNTO 3 - SOBRECARGA DE METODOS (Personal)");
-        Personal personal = new Ingeniero("Natural", "Ingenieria", "Tecnico", 1.75, 30,
-                "EMP001", "123456", "08:00", "Bogota", "Tecnico Senior",
-                "Carlos Lopez", "1994-05-10", 70.5, "Disco A", "3001234567",
-                "carlos@email.com", "2024-01-15", "General");
+        //System.out.println("   PUNTO 3 - SOBRECARGA DE METODOS (Personal)");
+        //Personal personal = new Ingeniero("Natural", "Ingenieria", "Tecnico", 1.75, 30,
+         //       "EMP001", "123456", "08:00", "Bogota", "Tecnico Senior",
+           //     "Carlos Lopez", "1994-05-10", 70.5, "Disco A", "3001234567",
+             //   "carlos@email.com", "2024-01-15", "General");
 
-        System.out.println(personal.calcularTiempoTrabajo("2020-01-01"));
-        System.out.println(personal.calcularTiempoTrabajo("08:00", "2020-01-01"));
-        System.out.println(personal.calcularTiempoTrabajo("08:00", "2020-01-01", "Turno regular"));
-        System.out.println();
+        //System.out.println(personal.calcularTiempoTrabajo("2020-01-01"));
+        //System.out.println(personal.calcularTiempoTrabajo("08:00", "2020-01-01"));
+        //System.out.println(personal.calcularTiempoTrabajo("08:00", "2020-01-01", "Turno regular"));
+        //System.out.println();
 
         // --- MENÚ INTERACTIVO (CRUD + ARCHIVOS) ---
         
@@ -104,6 +106,7 @@ public static void main(String[] args) {
         String path = "./";
         String name = "persistencia_personal.dat";
         int opcion = 0;
+         
 
         do {
             System.out.println("\n********** MENÚ DE OPERACIONES  **********");
