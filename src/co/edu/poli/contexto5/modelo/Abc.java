@@ -1,12 +1,23 @@
 package co.edu.poli.contexto5.modelo;
 
+/**
+ * Clase de utilidad para operaciones con objetos de tipo Personal.
+ * @author cathe586
+ */
 public class Abc {
+
+    /**
+     * Crea y retorna una instancia de Personal (Ingeniero o Supervisor) 
+     * según el valor de entrada.
+     * * @param per Identificador del tipo de personal a crear.
+     * @return Una instancia de Ingeniero o Supervisor.
+     */
     public static Personal operacion(int per) {
         if (per == 0) {
-            return new Personal("Natural", "Ingenieria", "Tecnico", 1.75, 30,
-                    "EMP001", "123456", "08:00", "Bogota", "Tecnico Senior",
-                    "Carlos Lopez", "1994-05-10", 70.5, "Disco A", "3001234567",
-                    "carlos@email.com", "2024-01-15");
+            return new Ingeniero("natural", "profesional", "ingeniero", 1.95, 30, "ELTC78",
+                    "3216754", "14:00", "Bogota", "ingeniero junior", "andres castro",
+                    "1999-11-08", 108.0, "disco f", "3006531234", "andres@email.com", "2024-01-15",
+                    "mecanica");
 
         } else if (per == 4) {
             return new Ingeniero("natural", "tecnico", "ingeniero", 1.65, 30, "ELTC78",
@@ -22,6 +33,11 @@ public class Abc {
 
     }
 
+    /**
+     * Identifica y retorna un mensaje con el nombre de la clase del objeto.
+     * * @param obj El objeto de tipo Personal a evaluar.
+     * @return Cadena de texto describiendo la clase del objeto.
+     */
     public static String operacion2(Personal obj) {
         if (obj.getClass().getSimpleName().equals("Personal")) {
             return "este es un objeto de clase Personal";

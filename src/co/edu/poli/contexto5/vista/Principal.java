@@ -1,6 +1,5 @@
 package co.edu.poli.contexto5.vista;
 
-import co.edu.poli.contexto5.modelo.Abc;
 import co.edu.poli.contexto5.modelo.Combustible;
 import co.edu.poli.contexto5.modelo.Empresa;
 import co.edu.poli.contexto5.modelo.Encargado;
@@ -12,174 +11,179 @@ import co.edu.poli.contexto5.modelo.Mision;
 import co.edu.poli.contexto5.modelo.Personal;
 import co.edu.poli.contexto5.modelo.Satelite;
 import co.edu.poli.contexto5.modelo.Simulacion;
-import co.edu.poli.contexto5.modelo.Supervisor;
+import co.edu.poli.contexto5.servicios.ImplementacionCRUD;
 import co.edu.poli.contexto5.servicios.Punto;
+import java.util.Scanner;
 
+/**
+ * Clase Principal que orquesta la ejecución del sistema de gestión espacial.
+ * * Esta clase realiza una demostración inicial de la instanciación de objetos,
+ * polimorfismo y sobrecarga, seguida de un menú interactivo para gestionar
+ * personal mediante operaciones CRUD y persistencia en archivos.
+ * * @author cathe586
+ * @version 2.0
+ */
 public class Principal {
 
+/**
+     * Punto de entrada de la aplicación.
+     * @param args Argumentos de línea de comandos.
+     */
+public static void main(String[] args) {
 
+        // --- BLOQUE DE INSTANCIACIÓN ORIGINAL ---
+        
+        Punto punto = new Punto("Bogota", "P001", "ENC001", "2020");
+        System.out.println(">> Punto: " + punto);
+        System.out.println("   " + punto.calcularEdadDePunto("2020"));
+        System.out.println();
 
-        public static void main(String[] args) {
+        Empresa empresa = new Empresa(null, 2010, "ENC001", "Satelites de comunicacion",
+                "contacto@empresa.com", "Bogota", "SateliteCo S.A.S", "2024-01-15",
+                "Monitoreo espacial");
 
-                Punto punto = new Punto("Bogota", "P001", "ENC001", "2020");
-                System.out.println(">> Punto: " + punto);
-                System.out.println("   " + punto.calcularEdadDePunto("2020"));
-                System.out.println();
+        Encargado encargado = new Encargado("Maria Perez", "32", "Doctorado", "SAT001",
+                "Perez", "25", "2024-01-15", "Directora", "maria@email.com",
+                "M-2024", "Colombiana", "EMP001", "ENC001", "Experta en satelites");
 
-                Empresa empresa = new Empresa(null, 2010, "ENC001", "Satelites de comunicacion",
-                                "contacto@empresa.com", "Bogota", "SateliteCo S.A.S", "2024-01-15",
-                                "Monitoreo espacial");
+        Combustible combustible = new Combustible("HydroFuel", "Hidrazina", "Transparente",
+                "500L", true, "Deposito A", "Alta pureza", "COMB001");
 
-                Encargado encargado = new Encargado("Maria Perez", "32", "Doctorado", "SAT001",
-                                "Perez", "25", "2024-01-15", "Directora", "maria@email.com",
-                                "M-2024", "Colombiana", "EMP001", "ENC001", "Experta en satelites");
+        Satelite satelite = new Satelite("SAT-001", "Explorer I", "Comunicacion",
+                "Orbita baja", "2022", 3.5, 450.0, "MANT001",
+                "EMP001", "Alta", "COMB001");
 
-                Combustible combustible = new Combustible("HydroFuel", "Hidrazina", "Transparente",
-                                "500L", true, "Deposito A", "Alta pureza", "COMB001");
+        Herramienta herramienta = new Herramienta(25.5, "Llave de torsion", "Ajuste de pernos",
+                "Llave T-200", "herramientas@empresa.com", "HER001",
+                "2023-06-01", "TorqueMaster", "TM-2023-001", "Rojo");
 
-                Satelite satelite = new Satelite("SAT-001", "Explorer I", "Comunicacion",
-                                "Orbita baja", "2022", 3.5, 450.0, "MANT001",
-                                "EMP001", "Alta", "COMB001");
+        Mantenimiento mantenimiento = new Mantenimiento("2024-01-15", "Preventivo",
+                "ENC001", "SAT-001", "10:00", "Alto", "Hangar 3",
+                "MANT001", "MANT000", "HER001");
 
-                Herramienta herramienta = new Herramienta(25.5, "Llave de torsion", "Ajuste de pernos",
-                                "Llave T-200", "herramientas@empresa.com", "HER001",
-                                "2023-06-01", "TorqueMaster", "TM-2023-001", "Rojo");
+        Simulacion simulacion = new Simulacion("Ing. Rodriguez", "Simulacion Orbital",
+                "Centro Espacial", "EMP001", "2023-11-01",
+                "15", "Sala Virtual A", "NASA Colombia", "SIM001");
 
-                Mantenimiento mantenimiento = new Mantenimiento("2024-01-15", "Preventivo",
-                                "ENC001", "SAT-001", "10:00", "Alto", "Hangar 3",
-                                "MANT001", "MANT000", "HER001");
+        Mision mision = new Mision("Exploracion", "2024-02-01", "REG-2024-01",
+                "SAT-001", "ENC001", "2024-08-01", "Orbita polar",
+                "50 muestras", "MIS001", "SIM001");
 
-                Simulacion simulacion = new Simulacion("Ing. Rodriguez", "Simulacion Orbital",
-                                "Centro Espacial", "EMP001", "2023-11-01",
-                                "15", "Sala Virtual A", "NASA Colombia", "SIM001");
+        Estacion estacion = new Estacion("EST-001", "Bogota D.C.", "EMP001",
+                "SAT-001", "Estacion Central", "estacion@empresa.com",
+                "EST001", "ENC001");
 
-                Mision mision = new Mision("Exploracion", "2024-02-01", "REG-2024-01",
-                                "SAT-001", "ENC001", "2024-08-01", "Orbita polar",
-                                "50 muestras", "MIS001", "SIM001");
+        System.out.println(">> Empresa:      " + empresa);
+        System.out.println(">> Encargado:    " + encargado);
+        System.out.println(">> Combustible:  " + combustible);
+        System.out.println(">> Satelite:     " + satelite);
+        System.out.println(">> Herramienta:  " + herramienta);
+        System.out.println(">> Mantenimiento:" + mantenimiento);
+        System.out.println(">> Simulacion:   " + simulacion);
+        System.out.println(">> Mision:       " + mision);
+        System.out.println(">> Estacion:     " + estacion);
+        System.out.println();
 
-                Estacion estacion = new Estacion("EST-001", "Bogota D.C.", "EMP001",
-                                "SAT-001", "Estacion Central", "estacion@empresa.com",
-                                "EST001", "ENC001");
+        // --- DEMOSTRACIÓN DE SOBRECARGA Y POLIMORFISMO ---
+        
+        System.out.println("   PUNTO 3 - SOBRECARGA DE METODOS (Personal)");
+        Personal personal = new Ingeniero("Natural", "Ingenieria", "Tecnico", 1.75, 30,
+                "EMP001", "123456", "08:00", "Bogota", "Tecnico Senior",
+                "Carlos Lopez", "1994-05-10", 70.5, "Disco A", "3001234567",
+                "carlos@email.com", "2024-01-15", "General");
 
-                System.out.println(">> Empresa:      " + empresa);
-                System.out.println(">> Encargado:    " + encargado);
-                System.out.println(">> Combustible:  " + combustible);
-                System.out.println(">> Satelite:     " + satelite);
-                System.out.println(">> Herramienta:  " + herramienta);
-                System.out.println(">> Mantenimiento:" + mantenimiento);
-                System.out.println(">> Simulacion:   " + simulacion);
-                System.out.println(">> Mision:       " + mision);
-                System.out.println(">> Estacion:     " + estacion);
-                System.out.println();
+        System.out.println(personal.calcularTiempoTrabajo("2020-01-01"));
+        System.out.println(personal.calcularTiempoTrabajo("08:00", "2020-01-01"));
+        System.out.println(personal.calcularTiempoTrabajo("08:00", "2020-01-01", "Turno regular"));
+        System.out.println();
 
-                System.out.println("   PUNTO 3 - SOBRECARGA DE METODOS (Personal)");
+        // --- MENÚ INTERACTIVO (CRUD + ARCHIVOS) ---
+        
+        ImplementacionCRUD crud = new ImplementacionCRUD();
+        Scanner sc = new Scanner(System.in);
+        String path = "./";
+        String name = "persistencia_personal.dat";
+        int opcion = 0;
 
-                Personal personal = new Personal("Natural", "Ingenieria", "Tecnico", 1.75, 30,
-                                "EMP001", "123456", "08:00", "Bogota", "Tecnico Senior",
-                                "Carlos Lopez", "1994-05-10", 70.5, "Disco A", "3001234567",
-                                "carlos@email.com", "2024-01-15");
+        do {
+            System.out.println("\n********** MENÚ DE OPERACIONES  **********");
+        System.out.println("1. Crear Personal (Ingeniero)");
+        System.out.println("2. Leer Personal (ID)");
+        System.out.println("3. Actualizar Personal (ID)");
+        System.out.println("4. Eliminar Personal (ID)");
+        System.out.println("5. Listar Contenido Actual");
+        System.out.println("6. Serializar (Guardar en Archivo)");
+        System.out.println("7. Deserializar (Cargar de Archivo)");
+        System.out.println("8. Salir");
+        System.out.print("Seleccione una opción: ");
 
-                // Sobrecarga v1 - 1 argumento
-                System.out.println(personal.calcularTiempoTrabajo("2020-01-01"));
-                // Sobrecarga v2 - 2 argumentos
-                System.out.println(personal.calcularTiempoTrabajo("08:00", "2020-01-01"));
-                // Sobrecarga v3 - 3 argumentos
-                System.out.println(personal.calcularTiempoTrabajo("08:00", "2020-01-01", "Turno regular"));
+        try {
+                opcion = Integer.parseInt(sc.nextLine());
 
-                System.out.println();
+                switch (opcion) {
+                case 1:
+                        System.out.print("Nombre: "); String nom = sc.nextLine();
+                        System.out.print("ID: "); String idC = sc.nextLine();
+                        Ingeniero nuevoIng = new Ingeniero("Natural", "Ing", "Tec", 1.80, 28, 
+                                "EMP01", idC, "07:00", "Bogota", "Ingeniero", 
+                                nom, "1996-01-01", 75.0, "D1", "300", "mail@mail.com", "2024", "Sistemas");
+                        System.out.println(crud.crear(nuevoIng));
+                        break;
 
-                System.out.println(personal.realizarMantenimiento("2024-01-15"));
-                System.out.println(personal.realizarMantenimiento("2024-01-15", "Carlos Lopez"));
-                System.out.println(personal.realizarMantenimiento("2024-01-15", "Carlos Lopez", "Preventivo"));
-                System.out.println();
+                case 2:
+                        System.out.print("ID a buscar: "); String idL = sc.nextLine();
+                        Personal pL = crud.leer(idL);
+                        System.out.println(pL != null ? pL : "No encontrado.");
+                        break;
 
-                System.out.println("   PUNTO 3 - SOBREESCRITURA DE METODOS");
+                case 3:
+                        System.out.print("ID a actualizar: "); String idA = sc.nextLine();
+                        System.out.print("Nuevo Nombre: "); String nNom = sc.nextLine();
+                        Personal pA = new Ingeniero("Natural", "Ing", "Tec", 1.80, 28, 
+                                "EMP01", idA, "07:00", "Bogota", "Ingeniero", 
+                                nNom, "1996-01-01", 75.0, "D1", "300", "mail@mail.com", "2024", "Sistemas");
+                        System.out.println(crud.actualizar(idA, pA));
+                        break;
 
-                Ingeniero ingeniero = new Ingeniero("Natural", "Maestria", "Ingeniero", 1.80, 35,
-                                "EMP001", "654321", "09:00", "Medellin", "Ingeniero Senior",
-                                "Ana Torres", "1989-03-22", 65.0, "Disco B", "3109876543",
-                                "ana@email.com", "2024-01-15", "Telecomunicaciones");
+                case 4:
+                        System.out.print("ID a eliminar: "); String idE = sc.nextLine();
+                        System.out.println(crud.eliminar(idE));
+                        break;
 
-                Supervisor supervisor = new Supervisor("Natural", "Especializacion", "Supervisor", 1.70, 40,
-                                "EMP001", "789012", "07:00", "Cali", "Supervisor General",
-                                "Luis Gomez", "1984-07-18", 80.0, "Disco C", "3157654321",
-                                "luis@email.com", "2024-01-15");
-                Ingeniero ingeniero2 = new Ingeniero("natural", "tecnico", "ingeniero", 1.65, 30, "ELTC78",
-                                "321654", "11:00", "Barranquilla", "ingeniero junior", "andres castro",
-                                "1993-10-05", 98.0, "disco n", "3005551234", "andres@email.com", "2024-01-15",
-                                "mecanica");
-
-                Personal[] equipo = { personal, ingeniero, supervisor, ingeniero2 };
-                System.out.println("--- obtenerRol() sobreescrito en cada subclase ---");
-                for (Personal p : equipo) {
-                        System.out.println(p.obtenerRol());
-                }
-                System.out.println();
-
-                System.out.println("--- calcularTiempoTrabajo(hora, fecha) sobreescrito ---");
-                for (Personal p : equipo) {
-                        System.out.println(p.calcularTiempoTrabajo("08:00", "2022-03-01"));
-                }
-                System.out.println();
-
-                System.out.println("   PUNTO 4 - ATRIBUTO ESTATICO totalPersonal");
-
-                System.out.println("Total de objetos Personal creados hasta ahora: "
-                                + Personal.getTotalPersonal());
-                System.out.println();
-
-                Personal p1 = new Personal("Natural", "Tecnico", "Operario", 1.68, 25,
-                                "EMP001", "111", "06:00", "Bogota", "Operario",
-                                "Pedro Ramirez", "1999-01-01", 68.0, "Disco D", "3001111111",
-                                "pedro@email.com", "2024-01-15");
-
-                Personal p2 = new Personal("Natural", "Profesional", "Analista", 1.72, 28,
-                                "EMP001", "222", "07:00", "Bogota", "Analista",
-                                "Sofia Castro", "1996-05-20", 55.0, "Disco E", "3002222222",
-                                "sofia@email.com", "2024-01-15");
-
-                System.out.println("totalPersonal visto desde Personal (clase):  " + Personal.getTotalPersonal());
-                System.out.println("totalPersonal visto desde p1 (objeto):       " + Personal.getTotalPersonal());
-                System.out.println("totalPersonal visto desde p2 (objeto):       " + Personal.getTotalPersonal());
-                System.out.println("totalPersonal visto desde ingeniero:         " + Personal.getTotalPersonal());
-                System.out.println("totalPersonal visto desde supervisor:        " + Personal.getTotalPersonal());
-                System.out.println();
-
-                System.out.println("--- Modificando totalPersonal a 99 ---");
-                Personal.setTotalPersonal(99);
-                System.out.println("personal.getTotalPersonal():   " + Personal.getTotalPersonal());
-                System.out.println("ingeniero.getTotalPersonal():  " + Personal.getTotalPersonal());
-                System.out.println("supervisor.getTotalPersonal(): " + Personal.getTotalPersonal());
-                System.out.println("p1.getTotalPersonal():         " + Personal.getTotalPersonal());
-                System.out.println("p2.getTotalPersonal():         " + Personal.getTotalPersonal());
-                System.out.println("-> Todos los objetos reflejan el mismo valor: " + Personal.getTotalPersonal());
-                System.out.println();
-
-                System.out.println();
-
-                // taller 6
-
-                Personal[] Arreglo = new Personal[5];
-                Arreglo[0] = p1;
-                Arreglo[1] = p2;
-                Arreglo[2] = ingeniero2;
-                Arreglo[3] = ingeniero;
-                Arreglo[4] = supervisor;
-                for (Personal p : Arreglo) {
-                        if(p != null){
-                        System.out.println(p.toString());
+                case 5:
+                        System.out.println("--- Listado de Memoria ---");
+                        for (Personal p : crud.getLista()) {
+                        if (p != null) System.out.println(p.getNombre() + " [" + p.getIdentificacion() + "]");
+                        else System.out.println("[Vacío]");
                         }
+                        break;
 
+                case 6:
+                        System.out.println(crud.serializar(crud.getLista(), path, name));
+                        break;
+
+                case 7:
+                        Personal[] recuperado = crud.deserializar(path, name);
+                        if (recuperado != null) System.out.println("Datos cargados exitosamente.");
+                        break;
+
+                case 8:
+                        System.out.println("Saliendo...");
+                        break;
+
+                        default:
+                        System.out.println("Opción inválida.");
                 }
-
-                System.out.println(Abc.operacion(4));
-                System.out.println(Abc.operacion(0));
-                System.out.println(Abc.operacion(7));
-
-                System.out.println(Abc.operacion2(ingeniero2));
-                System.out.println(Abc.operacion2(p1));
-                System.out.println(Abc.operacion2(supervisor));
-
+        } catch (Exception e) {
+                System.out.println("Error: Ingrese un número válido.");
+        
         }
+        } while (opcion != 8);
 
+        sc.close();
 }
+}
+
+
+
+
